@@ -159,10 +159,37 @@ const Godwallet = () => {
   };
 
   // Gemini API Integration
-  const fetchAIAnalysis = async (domain) => {
+  //const fetchAIAnalysis = async (domain) => {
+    //if (!domain || mode !== 'pro') return;
+    //setIsAnalyzing(true);
+    //setAiAnalysis('');
+const fetchAIAnalysis = async (domain) => {
     if (!domain || mode !== 'pro') return;
     setIsAnalyzing(true);
     setAiAnalysis('');
+
+    // SIMULATE A 1.5 SECOND API CALL
+    setTimeout(() => {
+      const mockAnalysis = `
+        ### Overall Recommendation: **Highly Recommended**
+
+        This domain is a strong match for your project goals.
+
+        #### Strengths
+        * **Brand Alignment:** The name '${domain.name}' aligns perfectly with your focus on **${userProfile.business_category[0]}** and **${userProfile.business_category[1]}**.
+        * **SEO Headstart:** With a Domain Authority of **${domain.authority}** and existing traffic, you can start your marketing campaigns with a significant advantage.
+        * **Budget Friendly:** At **$${domain.price}**, it falls comfortably within your stated budget of $${userProfile.budget_range.min}-$${userProfile.budget_range.max}.
+
+        #### Considerations
+        * **Restrictions:** Be mindful of the lease restriction: "*${domain.restrictions}*". This should be compatible with your project plans.
+
+        #### Value Assessment
+        The price is fair and competitive for a domain with these metrics. It represents a solid investment for launching your vision.
+      `;
+      setAiAnalysis(mockAnalysis);
+      setIsAnalyzing(false);
+    }, 1500); // 1.5-second delay
+  };
 
     const systemPrompt = `You are Godwallet AI, a domain marketplace expert assisting ${userProfile.name} with domain leasing.
 
@@ -896,4 +923,5 @@ Keep it concise, actionable, and encouraging. Use markdown formatting.`;
     </div>
   );
 };
+
 
